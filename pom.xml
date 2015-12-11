@@ -44,13 +44,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-            <!--<artifactId>maven-eclipse-plugin</artifactId>-->
-            <!--<version>2.9</version>-->
-            <!--<configuration>-->
-            <!--<downloadSources>true</downloadSources>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -198,6 +191,7 @@
             <artifactId>aopalliance</artifactId>
             <version>1.0</version>
         </dependency>
+
         <!-- log -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>

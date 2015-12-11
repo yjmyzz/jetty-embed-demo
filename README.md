@@ -7,7 +7,7 @@ mvn clean package
 
 cd target  
 
-java -jar jetty-embed.jar   
+java -jar jetty-embed-demo.jar   
 
 启动成功后,浏览 http://localhost:8080/demo/
 

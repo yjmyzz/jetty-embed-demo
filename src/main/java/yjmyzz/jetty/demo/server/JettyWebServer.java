@@ -80,18 +80,17 @@ public class JettyWebServer {
     }
 
     private RequestLog createRequestLog() {
+        //记录访问日志的处理
         NCSARequestLog requestLog = new NCSARequestLog();
-        //File logPath = new File(logDir);
-        //logPath.getParentFile().mkdirs();
         requestLog.setFilename(logDir + "/yyyy-mm-dd.log");
         requestLog.setRetainDays(90);
         requestLog.setExtended(false);
         requestLog.setAppend(true);
-        requestLog.setLogTimeZone("GMT");
+        //requestLog.setLogTimeZone("GMT");
+        requestLog.setLogTimeZone("Asia/Shanghai");
+        requestLog.setLogDateFormat("yyyy-MM-dd HH:mm:ss SSS");
         requestLog.setLogLatency(true);
-
         return requestLog;
     }
-
 
 }

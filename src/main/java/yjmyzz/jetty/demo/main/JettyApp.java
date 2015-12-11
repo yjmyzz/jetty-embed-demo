@@ -89,6 +89,8 @@ public class JettyApp {
     }
 
     private static void unzipSelf() {
+        //将jar自身解压
+
         String selfPath = FileUtil.getJarExecPath(JettyApp.class);
         if (selfPath.endsWith(".jar")) {
             // 运行环境
