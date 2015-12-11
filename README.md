@@ -1,8 +1,6 @@
-# Jetty9 embed Demo (with Spring MVC4 and Velocity)  
+## Jetty9 embed Demo (with Spring MVC4 and Velocity)  
 
---- 
-
-# Jetty9内嵌 + Spring MVC4 + Velocity 示例
+## Jetty9内嵌 + Spring MVC4 + Velocity 示例
 
 ---
 
