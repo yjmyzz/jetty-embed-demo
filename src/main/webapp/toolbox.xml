@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<toolbox>
+    <tool>
+        <key>number</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.NumberTool</class>
+    </tool>
+    <tool>
+        <key>date</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+    </tool>
+    <tool>
+        <key>convert</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.ConversionTool</class>
+    </tool>
+    <tool>
+        <key>link</key>
+        <scope>request</scope>
+        <class>org.apache.velocity.tools.view.LinkTool</class>
+    </tool>
+    <tool>
+        <key>params</key>
+        <scope>request</scope>
+        <class>org.apache.velocity.tools.view.ParameterTool</class>
+    </tool>
+</toolbox>

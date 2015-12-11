@@ -1,0 +1,30 @@
+#macro(baseHref)${req.getBaseUrl($request)}#end
+<!doctype html>
+<html>
+<head>
+    <title>hello</title>
+    <script type="text/javascript" src="#{baseHref}js/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="#{baseHref}css/global.css">
+</head>
+<body scroll="no">
+<h2 class="welcome">welcome to my world!</h2>
+
+<h2>Date:${date.systemDate}</h2>
+<h2>#{baseHref}</h2>
+
+<h3 id="h"></h3>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#h").text("jQuery is ready!").hide("slow").show("slow");
+    })
+</script>
+
+<ul>
+    <li><a href="#{baseHref}html/index.html" target="_blank">index.html</a></li>
+    <li><a href="#{baseHref}html/static.html" target="_blank">static.html</a></li>
+    <li><a href="#{baseHref}test" target="_blank">test</a></li>
+</ul>
+
+</body>
+</html>

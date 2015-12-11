@@ -1,0 +1,6 @@
+target
+var
+dependency-reduced-pom.xml
+logs
+web
+*.iml

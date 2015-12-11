@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <mvc:annotation-driven
+            content-negotiation-manager="contentNegotiationManager"
+            conversion-service="conversionService"/>
+
+    <context:component-scan base-package="yjmyzz.jetty.demo">
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+
+
+    <mvc:view-controller path="/" view-name="index"/>
+
+
+    <mvc:resources mapping="/css/**" location="classpath:css/"/>
+    <mvc:resources mapping="/html/**" location="classpath:html/"/>
+    <mvc:resources mapping="/js/**" location="classpath:js/"/>
+    <mvc:resources mapping="/view/**" location="classpath:views/"/>
+
+
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <!-- <bean class="yourConverter" /> -->
+            </set>
+        </property>
+    </bean>
+
+
+    <bean id="contentNegotiationManager"
+          class="org.springframework.web.accept.ContentNegotiationManager">
+        <constructor-arg>
+            <bean
+                    class="org.springframework.web.accept.PathExtensionContentNegotiationStrategy">
+                <constructor-arg>
+                    <map>
+                        <entry key="json" value="application/json;charset=utf-8"/>
+                        <entry key="xml" value="application/xml;charset=utf-8"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="velocityConfigurer"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="views/"/>
+        <property name="velocityProperties">
+            <props>
+                <prop key="directive.foreach.counter.name">loopCounter</prop>
+                <prop key="directive.foreach.counter.initial.value">0</prop>
+                <prop key="input.encoding">UTF-8</prop>
+                <prop key="output.encoding">UTF-8</prop>
+                <prop key="directive.foreach.counter.name">velocityCount</prop>
+                <prop key="directive.foreach.counter.initial.value">1</prop>
+                <prop key="velocimacro.library.autoreload">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="requestUtil" class="yjmyzz.jetty.demo.util.RequestUtil"/>
+
+    <bean
+            class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1"/>
+        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+                <bean
+                        class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+                    <property name="order" value="0"/>
+                    <property name="cache" value="true"/>
+                    <property name="prefix" value=""/>
+                    <property name="suffix" value=".vm"/>
+                    <property name="toolboxConfigLocation" value="toolbox.xml"/>
+                    <property name="contentType" value="text/html;charset=UTF-8"/>
+                    <property name="viewClass"
+                              value="yjmyzz.jetty.demo.util.VelocityToolbox2View"></property>
+                    <property name="attributesMap">
+                        <map>
+                            <entry key="req">
+                                <ref bean="requestUtil"/>
+                            </entry>
+                        </map>
+                    </property>
+                </bean>
+
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean id="jsonView"
+                      class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+                <bean id="xmlView"
+                      class="org.springframework.web.servlet.view.xml.MarshallingView">
+                    <constructor-arg>
+                        <bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+                            <property name="classesToBeBound">
+                                <list>
+                                    <value>yjmyzz.jetty.demo.domain.DemoObject</value>
+                                </list>
+                            </property>
+                        </bean>
+                    </constructor-arg>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="exceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="errors/error"/>
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Throwable">errors/error</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
