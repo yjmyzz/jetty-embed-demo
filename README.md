@@ -2,8 +2,6 @@
 
 ## Jetty9内嵌 + Spring MVC4 + Velocity 示例
 
----
-
 ### 运行方法
 mvn clean package  
 
