@@ -11,8 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jetty.version>9.3.24.v20180605</jetty.version>
-        <jetty.jsp.version>9.2.9.v20150224</jetty.jsp.version>
+        <jetty.version>9.4.9.v20180320</jetty.version>
         <spring.version>4.3.18.RELEASE</spring.version>
         <log4j.version>2.4.1</log4j.version>
         <slf4j.version>1.7.13</slf4j.version>
